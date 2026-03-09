@@ -1,22 +1,22 @@
+// Qualquer rota que não casou cai aqui
 function notFoundHandler(req, res, next) {
   return res.status(404).json({
     mensagem: 'Rota não encontrada.',
   });
 }
 
+// Define o status HTTP a partir do tipo de erro
 function mapStatusCode(err) {
   if (err.statusCode || err.status) {
     return err.statusCode || err.status;
   }
-
   if (err.isJoi) {
     return 400;
   }
-
+  // Postgres: unique violation (ex.: numeroPedido duplicado)
   if (err.code === '23505') {
     return 409;
   }
-
   return 500;
 }
 
@@ -61,11 +61,10 @@ function errorHandler(err, req, res, next) {
   const payload = {
     mensagem: buildClientMessage(err, status),
   };
-
+  // Em dev, devolve a lista de erros do Joi pra facilitar debug
   if (err.isJoi && err.details && !isProd) {
     payload.detalhes = err.details.map((detail) => detail.message);
   }
-
   return res.status(status).json(payload);
 }
 

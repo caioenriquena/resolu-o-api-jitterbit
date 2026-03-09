@@ -3,6 +3,7 @@ const helmet = require('helmet');
 const cors = require('cors');
 const rateLimit = require('express-rate-limit');
 
+// CORS: se CORS_ORIGINS (ou CORS_ORIGIN / ALLOWED_ORIGINS) estiver setado, usa lista de origens
 function buildCorsOptions() {
   const rawOrigins =
     process.env.CORS_ORIGINS ||
@@ -34,9 +35,9 @@ function applySecurityMiddlewares(app) {
   app.use(express.json({ limit: jsonLimit }));
 
   app.use(helmet());
-
   app.use(cors(buildCorsOptions()));
 
+  // Rate limit por IP (default 100 req / 15 min)
   const windowMsEnv = Number(process.env.RATE_LIMIT_WINDOW_MS);
   const maxEnv = Number(process.env.RATE_LIMIT_MAX);
 

@@ -9,7 +9,6 @@ const pool = new Pool({
 });
 
 pool.on('error', (err) => {
-  // Log simples para ajudar a diagnosticar problemas de conexão
   console.error('Erro inesperado no pool de conexões do PostgreSQL', err);
 });
 

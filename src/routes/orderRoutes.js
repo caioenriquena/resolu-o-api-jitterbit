@@ -16,19 +16,17 @@ const { authMiddleware } = require('../middlewares/auth');
 
 const router = express.Router();
 
-// POST /order
+// Criar pedido: exige token + body validado
 router.post('/', authMiddleware, validateCreateOrder, createOrderHandler);
 
-// GET /order/list
+// Listar com paginação (page, limit na query)
 router.get('/list', validateListOrdersQuery, listOrdersHandler);
 
-// GET /order/:numeroPedido
+// Busca por número do pedido (rota sem auth)
 router.get('/:numeroPedido', getOrderHandler);
 
-// PUT /order/:numeroPedido
+// Atualizar e deletar exigem auth
 router.put('/:numeroPedido', authMiddleware, validateUpdateOrder, updateOrderHandler);
-
-// DELETE /order/:numeroPedido
 router.delete('/:numeroPedido', authMiddleware, deleteOrderHandler);
 
 module.exports = router;

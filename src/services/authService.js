@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken');
 
+// Usuário/senha vêm do .env (pra não deixar fixo em produção)
 function getAuthConfig() {
   const username = process.env.AUTH_USERNAME || 'admin';
   const password = process.env.AUTH_PASSWORD || 'admin123';

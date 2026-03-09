@@ -12,20 +12,17 @@ const apiDocs = require('./docs/openapi.json');
 
 const app = express();
 
-// Middlewares globais de segurança e parsing
+// CORS, helmet, rate limit, body parser (tudo em security.js)
 applySecurityMiddlewares(app);
 
-// Documentação da API (Swagger UI)
+// Swagger em /docs
 app.use('/docs', swaggerUi.serve, swaggerUi.setup(apiDocs));
 
-// Rotas
 app.use('/auth', authRoutes);
 app.use('/order', orderRoutes);
 
-// 404 handler
+// Ordem importa: rotas primeiro, depois 404 e por último o error handler
 app.use(notFoundHandler);
-
-// Error handler central
 app.use(errorHandler);
 
 module.exports = app;

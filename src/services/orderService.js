@@ -6,6 +6,7 @@ const {
   deleteOrder,
 } = require('../repositories/orderRepository');
 
+// Converte o formato da API (numeroPedido, valorTotal, etc.) pro formato usado no repositório/banco
 function mapPayloadToDomain(payload) {
   const {
     numeroPedido,
@@ -31,6 +32,7 @@ function mapPayloadToDomain(payload) {
   return { order, items: domainItems };
 }
 
+// Converte de volta pro formato que a API expõe (mesmo contrato do request)
 function mapDomainToResponse(order) {
   if (!order) {
     return null;
@@ -53,9 +55,7 @@ function mapDomainToResponse(order) {
 
 async function createOrder(payload) {
   const { order, items } = mapPayloadToDomain(payload);
-
   const created = await createOrderWithItems(order, items);
-
   return mapDomainToResponse(created);
 }
 

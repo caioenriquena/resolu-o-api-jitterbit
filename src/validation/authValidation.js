@@ -3,7 +3,7 @@ const Joi = require('joi');
 const loginSchema = Joi.object({
   username: Joi.string().trim().max(100).required(),
   password: Joi.string().min(3).max(100).required(),
-}).unknown(false);
+}).unknown(false); // não aceita campos extras
 
 function buildValidator(schema, property = 'body') {
   return (req, res, next) => {

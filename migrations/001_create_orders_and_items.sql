@@ -1,11 +1,11 @@
--- Tabela de pedidos
+-- Pedidos: order_id é o numeroPedido que vem da API (texto pra suportar formatos externos)
 CREATE TABLE IF NOT EXISTS orders (
   order_id TEXT PRIMARY KEY,
   value NUMERIC(12, 2) NOT NULL CHECK (value >= 0),
   creation_date TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
 
--- Tabela de itens de pedido
+-- Itens: product_id = idItem; ao apagar o pedido os itens vão junto (CASCADE)
 CREATE TABLE IF NOT EXISTS items (
   id BIGSERIAL PRIMARY KEY,
   order_id TEXT NOT NULL,

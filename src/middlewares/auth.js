@@ -1,8 +1,8 @@
 const jwt = require('jsonwebtoken');
 
+// Espera header: Authorization: Bearer <token>
 function authMiddleware(req, res, next) {
   const authHeader = req.headers.authorization || '';
-
   const [scheme, token] = authHeader.split(' ');
 
   if (!token || scheme !== 'Bearer') {
@@ -14,9 +14,7 @@ function authMiddleware(req, res, next) {
   try {
     const secret = process.env.JWT_SECRET || 'changeme';
     const decoded = jwt.verify(token, secret);
-
     req.user = decoded;
-
     return next();
   } catch (err) {
     return res.status(401).json({

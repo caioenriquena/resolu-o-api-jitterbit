@@ -1,5 +1,6 @@
 const db = require('../db');
 
+// Transação: pedido + itens inseridos juntos, rollback se algo falhar
 async function createOrderWithItems(order, items) {
   const client = await db.pool.connect();
 
@@ -17,6 +18,7 @@ async function createOrderWithItems(order, items) {
       order.creationDate,
     ]);
 
+    // Insert em batch dos itens (um VALUES com vários placeholders)
     if (items && items.length > 0) {
       const values = [];
       const placeholders = [];
@@ -53,6 +55,7 @@ async function createOrderWithItems(order, items) {
   }
 }
 
+// Retorna null se não existir; monta o objeto order com array de items
 async function findOrderWithItemsById(orderId) {
   const queryText = `
     SELECT
@@ -100,6 +103,7 @@ async function findOrderWithItemsById(orderId) {
   return order;
 }
 
+// Paginação: sanitiza page/limit e usa LIMIT/OFFSET
 async function listOrdersWithItems({ page = 1, limit = 20 } = {}) {
   const safePage = Number.isNaN(Number(page)) || page < 1 ? 1 : Number(page);
   const safeLimit =
@@ -124,6 +128,7 @@ async function listOrdersWithItems({ page = 1, limit = 20 } = {}) {
 
   const result = await db.query(queryText, [safeLimit, offset]);
 
+  // Uma linha por item (JOIN); agrupa por order_id no Map
   const ordersMap = new Map();
 
   for (const row of result.rows) {
@@ -153,6 +158,7 @@ async function listOrdersWithItems({ page = 1, limit = 20 } = {}) {
   return Array.from(ordersMap.values());
 }
 
+// Atualiza cabeçalho do pedido e recria os itens (delete + insert)
 async function updateOrderWithItems(orderId, order, items) {
   const client = await db.pool.connect();
 
@@ -174,7 +180,7 @@ async function updateOrderWithItems(orderId, order, items) {
 
     if (updateResult.rowCount === 0) {
       await client.query('ROLLBACK');
-      return null;
+      return null; // pedido não existe
     }
 
     await client.query('DELETE FROM items WHERE order_id = $1', [orderId]);
@@ -215,10 +221,10 @@ async function updateOrderWithItems(orderId, order, items) {
   }
 }
 
+// FK em items tem ON DELETE CASCADE, então itens somem junto
 async function deleteOrder(orderId) {
   const deleteText = 'DELETE FROM orders WHERE order_id = $1';
   const result = await db.query(deleteText, [orderId]);
-
   return result.rowCount > 0;
 }
 
