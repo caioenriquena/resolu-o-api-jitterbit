@@ -75,37 +75,37 @@ Tela inicial com título "Orders API", seções **Autenticação** e **Pedidos**
 
 ### 2. Authorize (token JWT)
 
-Modal onde se cola o token obtido no login. Salve como `docs/screenshots/02-swagger-authorize.png`.
+Modal onde se cola o token obtido no login. 
 
 ![Swagger - Authorize](docs/screenshots/02-swagger-authorize.png)
 
 ### 3. POST /auth/login
 
-*(Opcional: capture o endpoint expandido com body e resposta 200. Salve como `docs/screenshots/03-auth-login.png`.)*
+*(Opcional: capture o endpoint expandido com body e resposta 200. 
 
 ![POST /auth/login](docs/screenshots/03-auth-login.png)
 
 ### 4. POST /order (criar pedido)
 
-Body de exemplo e resposta 201. Salve como `docs/screenshots/04-post-order.png`.
+Body de exemplo e resposta 201. 
 
 ![POST /order](docs/screenshots/04-post-order.png)
 
 ### 5. GET /order/list (listagem paginada)
 
-Parâmetros `page` e `limit` e resposta 200. Salve como `docs/screenshots/05-get-order-list.png`.
+Parâmetros `page` e `limit` e resposta 200. 
 
 ![GET /order/list](docs/screenshots/05-get-order-list.png)
 
 ### 6. GET /order/{numeroPedido} (buscar por número)
 
-Path parameter e resposta 200. Salve como `docs/screenshots/06-get-order-numero.png`.
+Path parameter e resposta 200. 
 
 ![GET /order/{numeroPedido}](docs/screenshots/06-get-order-numero.png)
 
 ### 7. PUT e DELETE (endpoints protegidos)
 
-PUT e DELETE com cadeado de autenticação. Salve como `docs/screenshots/07-put-delete.png`.
+PUT e DELETE com cadeado de autenticação. 
 
 ![PUT e DELETE](docs/screenshots/07-put-delete.png)
 
