@@ -7,20 +7,25 @@ const {
   updateOrderHandler,
   deleteOrderHandler,
 } = require('../controllers/orderController');
+const {
+  validateCreateOrder,
+  validateUpdateOrder,
+  validateListOrdersQuery,
+} = require('../validation/orderValidation');
 
 const router = express.Router();
 
 // POST /order
-router.post('/', createOrderHandler);
+router.post('/', validateCreateOrder, createOrderHandler);
 
 // GET /order/list
-router.get('/list', listOrdersHandler);
+router.get('/list', validateListOrdersQuery, listOrdersHandler);
 
 // GET /order/:numeroPedido
 router.get('/:numeroPedido', getOrderHandler);
 
 // PUT /order/:numeroPedido
-router.put('/:numeroPedido', updateOrderHandler);
+router.put('/:numeroPedido', validateUpdateOrder, updateOrderHandler);
 
 // DELETE /order/:numeroPedido
 router.delete('/:numeroPedido', deleteOrderHandler);
