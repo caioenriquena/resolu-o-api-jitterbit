@@ -81,7 +81,6 @@ Modal onde se cola o token obtido no login.
 
 ### 3. POST /auth/login
 
-*(Opcional: capture o endpoint expandido com body e resposta 200. 
 
 ![POST /auth/login](docs/screenshots/03-auth-login.png)
 
