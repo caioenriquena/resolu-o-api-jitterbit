@@ -12,11 +12,12 @@ const {
   validateUpdateOrder,
   validateListOrdersQuery,
 } = require('../validation/orderValidation');
+const { authMiddleware } = require('../middlewares/auth');
 
 const router = express.Router();
 
 // POST /order
-router.post('/', validateCreateOrder, createOrderHandler);
+router.post('/', authMiddleware, validateCreateOrder, createOrderHandler);
 
 // GET /order/list
 router.get('/list', validateListOrdersQuery, listOrdersHandler);
@@ -25,10 +26,10 @@ router.get('/list', validateListOrdersQuery, listOrdersHandler);
 router.get('/:numeroPedido', getOrderHandler);
 
 // PUT /order/:numeroPedido
-router.put('/:numeroPedido', validateUpdateOrder, updateOrderHandler);
+router.put('/:numeroPedido', authMiddleware, validateUpdateOrder, updateOrderHandler);
 
 // DELETE /order/:numeroPedido
-router.delete('/:numeroPedido', deleteOrderHandler);
+router.delete('/:numeroPedido', authMiddleware, deleteOrderHandler);
 
 module.exports = router;
 
