@@ -81,8 +81,8 @@ Modal onde se cola o token obtido no login.
 
 ### 3. POST /auth/login
 
+<img width="1428" height="626" alt="image" src="https://github.com/user-attachments/assets/c4a4ceb3-3ba1-4181-ab30-b25a668f6050" />
 
-![POST /auth/login](docs/screenshots/03-auth-login.png)
 
 ### 4. POST /order (criar pedido)
 
@@ -106,7 +106,9 @@ Path parameter e resposta 200.
 
 PUT e DELETE com cadeado de autenticação. 
 
-![PUT e DELETE](docs/screenshots/07-put-delete.png)
+<img width="1472" height="545" alt="image" src="https://github.com/user-attachments/assets/91230966-ae08-48af-b595-fe47aff98a49" />
+
+<img width="1601" height="484" alt="image" src="https://github.com/user-attachments/assets/1271208c-6dc0-48c7-8ea7-b925159e301e" />
 
 ---
 
