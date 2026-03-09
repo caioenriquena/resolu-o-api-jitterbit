@@ -69,7 +69,7 @@ Lá você pode ver todos os endpoints e testar as requisições direto no navega
 
 ### 1. Visão geral do Swagger
 
-Tela inicial com título "Orders API", seções **Autenticação** e **Pedidos** e a lista de endpoints. Salve como `docs/screenshots/01-swagger-overview.png`.
+Tela inicial com título "Orders API", seções **Autenticação** e **Pedidos** e a lista de endpoints. 
 
 ![Swagger - Visão geral](docs/screenshots/01-swagger-overview.png)
 
